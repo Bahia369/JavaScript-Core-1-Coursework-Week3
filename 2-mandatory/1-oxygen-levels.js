@@ -11,8 +11,30 @@
     Some string methods that might help you here are .replace() and .substring(). 
 */
 
-function findSafeOxygenLevel() {}
+//function findSafeOxygenLevel() {
 
+// function findSafeOxygenLevel(arr) {
+//     const convert = arr.map(function(element) {
+//         return parseFloat(element);
+//     });
+//     const OxygenLevel = convert.find(function(element) {
+//         return element > 19.5 && element < 23.5;
+//     });
+//     console.log(findSafeOxygenLevel);
+
+//     return `${OxygenLevel}%`;
+// }
+function findSafeOxygenLevel(arr) {
+    const convert = arr.map((item) => {
+        return parseFloat(item);
+    });
+    const o2 = convert.find((item) => {
+        return item > 19.5 && item < 23.5;
+    });
+    return `${o2}%`;
+}
+
+// console.log(findSafeOxygenLevel);
 /* ======= TESTS - DO NOT MODIFY ===== */
 
 const oxygenLevels1 = ["24.2%", "11.3%", "19.9%", "23.1%", "29.3%", "20.2%"];
@@ -22,20 +44,40 @@ const oxygenLevels3 = ["200%", "21.1%"];
 const util = require("util");
 
 function test(test_name, actual, expected) {
-  let status;
-  if (actual === expected) {
-    status = "PASSED";
-  } else {
-    status = `FAILED: expected: ${util.inspect(
-      expected
-    )} but your function returned: ${util.inspect(actual)}`;
-  }
+    let status;
+    if (actual === expected) {
+        status = "PASSED";
+    } else {
+        status = `
+    FAILED: expected: $ {
+        util.inspect(
+            expected
+        )
+    }
+    but your
+    function returned: $ { util.inspect(actual) }
+    `;
+    }
 
-  console.log(`${test_name}: ${status}`);
+    console.log(`
+    $ { test_name }: $ { status }
+    `);
 }
 
-test("findSafeOxygenLevel function works - case 1", findSafeOxygenLevel(oxygenLevels1), "19.9%");
+test(
+    "findSafeOxygenLevel function works - case 1",
+    findSafeOxygenLevel(oxygenLevels1),
+    "19.9%"
+);
 
-test("findSafeOxygenLevel function works - case 2", findSafeOxygenLevel(oxygenLevels2), "20.2%");
+test(
+    "findSafeOxygenLevel function works - case 2",
+    findSafeOxygenLevel(oxygenLevels2),
+    "20.2%"
+);
 
-test("findSafeOxygenLevel function works - case 3", findSafeOxygenLevel(oxygenLevels3), "21.1%");
+test(
+    "findSafeOxygenLevel function works - case 3",
+    findSafeOxygenLevel(oxygenLevels3),
+    "21.1%"
+);

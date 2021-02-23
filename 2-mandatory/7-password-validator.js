@@ -24,55 +24,50 @@ PasswordValidationResult=  [false, false, false, false, true]
 
 */
 
-function validatePasswords(passwords) {
+function validatePasswords(password) {
+    let checkPass = password.map((elem, index, arr) => {
+        if (
+            elem.length >= 5 &&
+            /[a-z]/.test(elem) &&
+            /[A-Z]/.test(elem) &&
+            /[0-9]/.test(elem) &&
+            /[!#$%,&*]/.test(elem) &&
+            arr.indexOf(elem) === index
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    return checkPass;
 }
-
-// Returns true if string contains at least one uppercase letter.
-function containsUppercaseLetter(string) {
-    return /[A-Z]/.test(string);
-}
-
-// Returns true if string contains at least one lowercase letter.
-function containsLowercaseLetter(string) {
-    return /[a-z]/.test(string);
-}
-
-// Returns true if string contains at least one number.
-function containsNumber(string) {
-    return /[0-9]/.test(string);
-}
-
-// Returns true if string contains at least one symbol.
-function containsSymbol(string) {
-    return /[!#$%.*&]/.test(string);
-}
-
+console.log(validatePasswords);
 /* ======= TESTS - DO NOT MODIFY ===== */
 
-const passwords1 = ["Se%5", "TktE.TJTU", "384#HsHF", "dvyyeyy!5", "tryT3729"]
-const passwords2 = ["StUFf27%", "Pl3nty!", "Jai33", "shajsaUA**&&", "Pl3nty!"]
+const passwords1 = ["Se%5", "TktE.TJTU", "384#HsHF", "dvyyeyy!5", "tryT3729"];
+const passwords2 = ["StUFf27%", "Pl3nty!", "Jai33", "shajsaUA**&&", "Pl3nty!"];
 
-const util = require('util');
+const util = require("util");
 
 function test(test_name, actual, expected) {
     let status;
     if (util.isDeepStrictEqual(actual, expected)) {
         status = "PASSED";
     } else {
-        status = `FAILED: expected: ${util.inspect(expected)} but your function returned: ${util.inspect(actual)}`;
+        status = `FAILED: expected: ${util.inspect(
+      expected
+    )} but your function returned: ${util.inspect(actual)}`;
     }
 
     console.log(`${test_name}: ${status}`);
 }
 
 test(
-  "validatePasswords function works - case 1",
-  validatePasswords(passwords1),
-  [false, false, true, false, false]
- );
+    "validatePasswords function works - case 1",
+    validatePasswords(passwords1), [false, false, true, false, false]
+);
 
 test(
-  "validatePasswords function works - case 2",
-  validatePasswords(passwords2),
-  [true, true, false, false, false]
+    "validatePasswords function works - case 2",
+    validatePasswords(passwords2), [true, true, false, false, false]
 );
